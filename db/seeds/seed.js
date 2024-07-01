@@ -32,7 +32,7 @@ async function seed ({userData, walkData, walkLocationsData}) {
                         latitude NUMERIC(10,7) NOT NULL, 
                         longitude NUMERIC(10,7) NOT NULL, 
                         altitude NUMERIC(6,2) NOT NULL, 
-                        timestamp TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP );`)
+                        location_timestamp TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP );`)
 
 
     // Create data.
