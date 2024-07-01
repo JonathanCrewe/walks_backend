@@ -3,7 +3,7 @@ const db = require('../connection');
 
 // ToDo add params back in when creating seed data
 //async function seed ({ topicData, userData, articleData, commentData }) {
-async function seed ({userData, walkData}) {
+async function seed ({userData, walkData, walkLocationsData}) {
     // Drop any existing tables. 
     await db.query(`DROP TABLE IF EXISTS walk_location_points;`);
     await db.query(`DROP TABLE IF EXISTS walks;`);
@@ -32,16 +32,20 @@ async function seed ({userData, walkData}) {
                         latitude NUMERIC(10,7) NOT NULL, 
                         longitude NUMERIC(10,7) NOT NULL, 
                         altitude NUMERIC(6,2) NOT NULL, 
-                        timestamp TIMESTAMP NOT NULL );`)
+                        timestamp TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP );`)
+
 
     // Create data.
+
+    // Users.
     const insertUserStr = format(`INSERT INTO users (username, password) VALUES %L RETURNING *;`, 
                                     userData.map( ({username, password}) => [username, password])
     )
 
-    const insertResult = await db.query(insertUserStr)
-    const userId = insertResult.rows[0].id
+    const insertUserResult = await db.query(insertUserStr)
+    const userId = insertUserResult.rows[0].id
 
+    // Walks. 
     const insertWalkStr = format(`INSERT INTO walks (
                                     creator_id,
                                     title,
@@ -53,28 +57,48 @@ async function seed ({userData, walkData}) {
                                     start_latitude,
                                     start_longitude,
                                     start_altitude
-                                ) VALUES %L;`, 
-                                walkData.map( ({title,
-                                    description, 
-                                    distance,
-                                    ascent,
-                                    rating, 
-                                    difficulty,
-                                    start_latitude,
-                                    start_longitude,
-                                    start_altitude}) => [userId,
-                                                            title,
-                                                            description, 
-                                                            distance,
-                                                            ascent,
-                                                            rating, 
-                                                            difficulty,
-                                                            start_latitude,
-                                                            start_longitude,
-                                                            start_altitude])
+                                ) 
+                                VALUES %L RETURNING *;`, 
+                                    walkData.map( ({title,
+                                                    description, 
+                                                    distance,
+                                                    ascent,
+                                                    rating, 
+                                                    difficulty,
+                                                    start_latitude,
+                                                    start_longitude,
+                                                    start_altitude}) => [   userId,
+                                                                            title,
+                                                                            description, 
+                                                                            distance,
+                                                                            ascent,
+                                                                            rating, 
+                                                                            difficulty,
+                                                                            start_latitude,
+                                                                            start_longitude,
+                                                                            start_altitude])
     )
     
-    return await db.query(insertWalkStr)
+    
+
+    const insertWalkResult = await db.query(insertWalkStr)
+    const walkId = insertWalkResult.rows[0].id
+
+    // Walk Location Points.
+    const insertWalkLocationsStr = format(`INSERT INTO walk_location_points (
+                                                walk_id, 
+                                                latitude, 
+                                                longitude, 
+                                                altitude) 
+                                            VALUES %L;`, 
+                                            walkLocationsData.map( ({latitude, longitude, altitude}) => [   walkId, 
+                                                                                                            latitude, 
+                                                                                                            longitude,
+                                                                                                            altitude
+                                                                                                        ])
+                                        )
+
+    return await db.query(insertWalkLocationsStr)
 }
 
 module.exports = seed;

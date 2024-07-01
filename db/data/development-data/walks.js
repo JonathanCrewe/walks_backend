@@ -3,7 +3,7 @@ module.exports = [
         title: 'Bronte country',
         description: 'Haworth to Withins Heights and back via Bronte Waterfalls and Bronte Bridge.',
         distance_km: 11.72,
-        ascent: null,
+        ascent: 345.75,
         rating: null, 
         difficulty:  null,
         start_latitude: 53.8289460,
