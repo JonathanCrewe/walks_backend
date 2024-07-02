@@ -1,8 +1,6 @@
 const format = require('pg-format');
 const db = require('../connection');
 
-// ToDo add params back in when creating seed data
-//async function seed ({ topicData, userData, articleData, commentData }) {
 async function seed ({userData, walkData, walkLocationsData}) {
     // Drop any existing tables. 
     await db.query(`DROP TABLE IF EXISTS walk_location_points;`);
