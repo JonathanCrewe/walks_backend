@@ -2,6 +2,8 @@ const db = require("../db/connection")
 const format = require('pg-format');
 
 async function createTrail(trailObj) {
+    const returnObj = {}
+
     // Insert the WALK record. 
     const walkObj = trailObj.walk
     let insertWalkStr = `INSERT INTO walks (
@@ -38,7 +40,9 @@ async function createTrail(trailObj) {
                                                             walkObj.start_latitude,
                                                             walkObj.start_longitude,
                                                             walkObj.start_altitude])
-    const walkId = insertWalkResult.rows[0].id
+    
+    returnObj.walk = insertWalkResult.rows[0]
+    const walkId = returnObj.walk.id
 
     // Insert WALK_LOCATION_POINTS records. 
     const locationsObj = trailObj.locations
@@ -55,8 +59,9 @@ async function createTrail(trailObj) {
                                                                                                         ])
                                         )
 
-    return await db.query(insertWalkLocationsStr)
-    // ToDo - return the created objects? Just the Walk object?
+    await db.query(insertWalkLocationsStr)
+
+    return returnObj
 }
 
 module.exports = createTrail

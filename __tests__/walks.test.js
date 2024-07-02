@@ -30,7 +30,7 @@ describe("POST/api/walks", () => {
                 start_latitude: 53.8289460,
                 start_longitude: -1.9569740,
                 start_altitude: 0 
-            },
+                },
             locations: [    {   latitude: 53.8289460, 
                                 longitude: -1.9569740,
                                 altitude: 0 
@@ -44,10 +44,23 @@ describe("POST/api/walks", () => {
                                 altitude: 0
                             }
                         ]
-        }
+            }
+
+        const expetedResult = { walk: { id: 2,
+                                        creator_id: 1,
+                                        title: 'Bronte country 2',
+                                        description: 'Haworth to Withins Heights with only start, middle and end locations.',
+                                        distance: null,
+                                        ascent: '345.75',
+                                        rating: null,
+                                        difficulty: null,
+                                        start_latitude: '53.8289460',
+                                        start_longitude: '-1.9569740',
+                                        start_altitude: '0.00'}
+                                }
+      
 
         const response  = await request(app).post("/api/walks").send(requestBody).expect(201)
-
-        // ToDo - expect body to be new walk object?
+        expect(response.body).toEqual(expetedResult)
     })
 })
