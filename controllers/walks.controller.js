@@ -1,4 +1,4 @@
-const createTrail = require('../models/walks.model')
+const {createTrail, fetchWalks} = require('../models/walks.model')
 
 async function postTrail(req, res, next) {
     try {
@@ -11,4 +11,15 @@ async function postTrail(req, res, next) {
     }
 }
 
-module.exports = postTrail
+async function getWalks(req, res, next) {
+    try {
+        const walkArray = await fetchWalks()
+        res.status(200).send({walks: walkArray})
+    }
+    catch {
+        next(err)
+    }
+}
+
+
+module.exports = {getWalks, postTrail}

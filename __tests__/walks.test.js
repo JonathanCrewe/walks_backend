@@ -25,7 +25,6 @@ describe("POST/api/walks", () => {
                 description: 'Haworth to Withins Heights with only start, middle and end locations.',
                 distance_km: 11.72,
                 ascent: 345.75,
-                rating: null, 
                 difficulty:  null,
                 start_latitude: 53.8289460,
                 start_longitude: -1.9569740,
@@ -50,7 +49,7 @@ describe("POST/api/walks", () => {
                                         creator_id: 1,
                                         title: 'Bronte country 2',
                                         description: 'Haworth to Withins Heights with only start, middle and end locations.',
-                                        distance: null,
+                                        distance_km: '11.72',
                                         ascent: '345.75',
                                         rating: null,
                                         difficulty: null,
@@ -62,5 +61,25 @@ describe("POST/api/walks", () => {
 
         const response  = await request(app).post("/api/walks").send(requestBody).expect(201)
         expect(response.body).toEqual(expetedResult)
+    })
+})
+
+describe("GET/api/walks", () => {
+    test("200 - responds with a 200 and list of walks", async () => {
+        const expectedResult = [{   creator_id: 1,
+                                    title: 'Bronte country',
+                                    description: 'Haworth to Withins Heights and back via Bronte Waterfalls and Bronte Bridge.',
+                                    distance_km: "11.72",
+                                    ascent: "345.75",
+                                    rating: null, 
+                                    difficulty:  null,
+                                    start_latitude: "53.8289460",
+                                    start_longitude: "-1.9569740",
+                                    start_altitude: "0.00" 
+                                }
+                                ]
+
+        const {body} = await request(app).get("/api/walks").expect(200)
+        expect(body.walks).toEqual(expectedResult)
     })
 })

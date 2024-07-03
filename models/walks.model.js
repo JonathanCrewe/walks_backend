@@ -10,9 +10,8 @@ async function createTrail(trailObj) {
                                     creator_id,
                                     title,
                                     description, 
-                                    distance,
+                                    distance_km,
                                     ascent,
-                                    rating, 
                                     difficulty,
                                     start_latitude,
                                     start_longitude,
@@ -27,15 +26,13 @@ async function createTrail(trailObj) {
                                     $6,
                                     $7, 
                                     $8, 
-                                    $9,
-                                    $10 ) RETURNING *;`
+                                    $9 ) RETURNING *;`
 
     const insertWalkResult = await db.query(insertWalkStr, [walkObj.creator_id,
                                                             walkObj.title,
                                                             walkObj.description, 
-                                                            walkObj.distance,
+                                                            walkObj.distance_km,
                                                             walkObj.ascent,
-                                                            walkObj.rating, 
                                                             walkObj.difficulty,
                                                             walkObj.start_latitude,
                                                             walkObj.start_longitude,
@@ -64,4 +61,21 @@ async function createTrail(trailObj) {
     return returnObj
 }
 
-module.exports = createTrail
+async function fetchWalks() {
+    const walkQueryStr =   `SELECT  creator_id,
+                                    title,
+                                    description, 
+                                    distance_km,
+                                    ascent,
+                                    rating, 
+                                    difficulty,
+                                    start_latitude,
+                                    start_longitude,
+                                    start_altitude
+                            FROM walks;`
+    const fetchWalksResult = await db.query(walkQueryStr)
+
+    return fetchWalksResult.rows
+}
+
+module.exports = {createTrail, fetchWalks}

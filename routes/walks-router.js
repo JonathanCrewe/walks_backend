@@ -1,6 +1,8 @@
 const walksRouter = require('express').Router()
-const postTrail = require('../controllers/walks.controller')
+const {getWalks, postTrail} = require('../controllers/walks.controller')
 
-walksRouter.route('/').post(postTrail)
+walksRouter.route('/')
+    .get(getWalks)
+    .post(postTrail)
 
 module.exports = walksRouter
