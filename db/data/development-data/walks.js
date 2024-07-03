@@ -20,5 +20,5 @@ module.exports = [
         start_latitude: 53.9166200,
         start_longitude: -1.7998800,
         start_altitude: 0 
-    },
+    }
 ]

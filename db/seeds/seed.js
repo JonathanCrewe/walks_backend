@@ -2,7 +2,6 @@ const format = require('pg-format');
 const db = require('../connection');
 
 async function seed ({userData, walkData, walkLocationsData}) {
-    console.log(walkLocationsData)
     // Drop any existing tables. 
     await db.query(`DROP TABLE IF EXISTS walk_location_points;`);
     await db.query(`DROP TABLE IF EXISTS walks;`);

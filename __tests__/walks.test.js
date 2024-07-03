@@ -45,7 +45,7 @@ describe("POST/api/walks", () => {
                         ]
             }
 
-        const expetedResult = { walk: { id: 2,
+        const expetedResult = { walk: { id: 3,
                                         creator_id: 1,
                                         title: 'Bronte country 2',
                                         description: 'Haworth to Withins Heights with only start, middle and end locations.',
@@ -76,6 +76,18 @@ describe("GET/api/walks", () => {
                                     difficulty:  null,
                                     start_latitude: "53.8289460",
                                     start_longitude: "-1.9569740",
+                                    start_altitude: "0.00" 
+                                },
+                                {   id: 2,
+                                    creator_id: 1,
+                                    title: 'Ilkley Moor',
+                                    description: 'Ilkley Moor - short and windy walk.',
+                                    distance_km: "5.55",
+                                    ascent: "219.62",
+                                    rating: null, 
+                                    difficulty:  null,
+                                    start_latitude: "53.9166200",
+                                    start_longitude: "-1.7998800",
                                     start_altitude: "0.00" 
                                 }
                                 ]
