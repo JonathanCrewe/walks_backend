@@ -5,4 +5,7 @@ walksRouter.route('/')
     .get(getWalks)
     .post(postTrail)
 
+walksRouter.route('/:creator_id')
+    .get(getWalks)
+
 module.exports = walksRouter

@@ -41,7 +41,7 @@ async function seed ({userData, walkData, walkLocationsData}) {
     )
 
     const insertUserResult = await db.query(insertUserStr)
-    const userId = insertUserResult.rows[0].id
+   // const userId = insertUserResult.rows[0].id
 
     // Walks. 
     const insertWalkStr = format(`INSERT INTO walks (
@@ -57,7 +57,8 @@ async function seed ({userData, walkData, walkLocationsData}) {
                                     start_altitude
                                 ) 
                                 VALUES %L RETURNING *;`, 
-                                    walkData.map( ({title,
+                                    walkData.map( ({creator_id, 
+                                                    title,
                                                     description, 
                                                     distance_km,
                                                     ascent,
@@ -65,7 +66,7 @@ async function seed ({userData, walkData, walkLocationsData}) {
                                                     difficulty,
                                                     start_latitude,
                                                     start_longitude,
-                                                    start_altitude}) => [   userId,
+                                                    start_altitude}) => [   creator_id,
                                                                             title,
                                                                             description, 
                                                                             distance_km,
@@ -80,7 +81,6 @@ async function seed ({userData, walkData, walkLocationsData}) {
     
 
     const insertWalkResult = await db.query(insertWalkStr)
-   // const walkId = insertWalkResult.rows[0].id
 
     // Walk Location Points.
     for (const walkLocationData of walkLocationsData) {

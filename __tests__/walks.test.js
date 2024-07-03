@@ -79,7 +79,7 @@ describe("GET/api/walks", () => {
                                     start_altitude: "0.00" 
                                 },
                                 {   id: 2,
-                                    creator_id: 1,
+                                    creator_id: 2,
                                     title: 'Ilkley Moor',
                                     description: 'Ilkley Moor - short and windy walk.',
                                     distance_km: "5.55",
@@ -93,6 +93,27 @@ describe("GET/api/walks", () => {
                                 ]
 
         const {body} = await request(app).get("/api/walks").expect(200)
+        expect(body.walks).toEqual(expectedResult)
+    })
+})
+
+describe("GET/api/walks/:creator_id", () => {
+    test("200 - responds with a 200 and list of walks by creator_id", async () => {
+        const expectedResult = [{   id: 2,
+                                    creator_id: 2,
+                                    title: 'Ilkley Moor',
+                                    description: 'Ilkley Moor - short and windy walk.',
+                                    distance_km: "5.55",
+                                    ascent: "219.62",
+                                    rating: null, 
+                                    difficulty:  null,
+                                    start_latitude: "53.9166200",
+                                    start_longitude: "-1.7998800",
+                                    start_altitude: "0.00" 
+                                }
+                                ]
+
+        const {body} = await request(app).get("/api/walks/2").expect(200)
         expect(body.walks).toEqual(expectedResult)
     })
 })

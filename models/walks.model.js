@@ -61,12 +61,23 @@ async function createTrail(trailObj) {
     return returnObj
 }
 
-async function fetchWalks() {
-    const walkQueryStr =   `SELECT *
-                            FROM walks;`
-    const fetchWalksResult = await db.query(walkQueryStr)
+async function fetchWalks(creatorId) {
+    let walkQueryStr = `SELECT *
+                        FROM walks`
+
+    const queryParamArray = []
+
+    if (creatorId) {
+        queryParamArray.push(creatorId)
+        walkQueryStr = walkQueryStr + ' WHERE creator_id = $1'
+    }
+
+    walkQueryStr = walkQueryStr + ';'
+
+    const fetchWalksResult = await db.query(walkQueryStr, queryParamArray)
 
     return fetchWalksResult.rows
 }
+
 
 module.exports = {createTrail, fetchWalks}

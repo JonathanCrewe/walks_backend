@@ -1,5 +1,5 @@
 module.exports = [
-    {
+    {   creator_id: 1,
         title: 'Bronte country',
         description: 'Haworth to Withins Heights and back via Bronte Waterfalls and Bronte Bridge.',
         distance_km: 11.72,
@@ -11,6 +11,7 @@ module.exports = [
         start_altitude: 0 
     },
     {
+        creator_id: 2,
         title: 'Ilkley Moor',
         description: 'Ilkley Moor - short and windy walk.',
         distance_km: 5.55,
