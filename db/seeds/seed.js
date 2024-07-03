@@ -2,6 +2,7 @@ const format = require('pg-format');
 const db = require('../connection');
 
 async function seed ({userData, walkData, walkLocationsData}) {
+    console.log(walkLocationsData)
     // Drop any existing tables. 
     await db.query(`DROP TABLE IF EXISTS walk_location_points;`);
     await db.query(`DROP TABLE IF EXISTS walks;`);
@@ -80,23 +81,27 @@ async function seed ({userData, walkData, walkLocationsData}) {
     
 
     const insertWalkResult = await db.query(insertWalkStr)
-    const walkId = insertWalkResult.rows[0].id
+   // const walkId = insertWalkResult.rows[0].id
 
     // Walk Location Points.
-    const insertWalkLocationsStr = format(`INSERT INTO walk_location_points (
-                                                walk_id, 
-                                                latitude, 
-                                                longitude, 
-                                                altitude) 
-                                            VALUES %L;`, 
-                                            walkLocationsData.map( ({latitude, longitude, altitude}) => [   walkId, 
-                                                                                                            latitude, 
-                                                                                                            longitude,
-                                                                                                            altitude
-                                                                                                        ])
-                                        )
+    for (const walkLocationData of walkLocationsData) {
+        const insertWalkLocationsStr = 
+                format(`INSERT INTO walk_location_points (
+                            walk_id, 
+                            latitude, 
+                            longitude, 
+                            altitude) 
+                        VALUES %L;`, 
+                        walkLocationData.map( ({walk_id, latitude, longitude, altitude}) => 
+                                                    [   walk_id, 
+                                                        latitude, 
+                                                        longitude,
+                                                        altitude
+                                                    ])
+                        )
+        await db.query(insertWalkLocationsStr)
+    }
 
-    return await db.query(insertWalkLocationsStr)
 }
 
 module.exports = seed;

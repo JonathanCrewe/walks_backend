@@ -66,7 +66,8 @@ describe("POST/api/walks", () => {
 
 describe("GET/api/walks", () => {
     test("200 - responds with a 200 and list of walks", async () => {
-        const expectedResult = [{   creator_id: 1,
+        const expectedResult = [{   id: 1,
+                                    creator_id: 1,
                                     title: 'Bronte country',
                                     description: 'Haworth to Withins Heights and back via Bronte Waterfalls and Bronte Bridge.',
                                     distance_km: "11.72",

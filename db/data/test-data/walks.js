@@ -9,5 +9,16 @@ module.exports = [
         start_latitude: 53.8289460,
         start_longitude: -1.9569740,
         start_altitude: 0 
-    }
+    },
+    {
+        title: 'Ilkley Moor',
+        description: 'Ilkley Moor - short and windy walk.',
+        distance_km: 5.55,
+        ascent: 219.62,
+        rating: null, 
+        difficulty:  null,
+        start_latitude: 53.9166200,
+        start_longitude: -1.7998800,
+        start_altitude: 0 
+    },
 ]

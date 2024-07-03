@@ -36,7 +36,7 @@ async function createTrail(trailObj) {
                                                             walkObj.difficulty,
                                                             walkObj.start_latitude,
                                                             walkObj.start_longitude,
-                                                            walkObj.start_altitude])
+                                                            walkObj.start_altitude ])
     
     returnObj.walk = insertWalkResult.rows[0]
     const walkId = returnObj.walk.id
@@ -62,16 +62,7 @@ async function createTrail(trailObj) {
 }
 
 async function fetchWalks() {
-    const walkQueryStr =   `SELECT  creator_id,
-                                    title,
-                                    description, 
-                                    distance_km,
-                                    ascent,
-                                    rating, 
-                                    difficulty,
-                                    start_latitude,
-                                    start_longitude,
-                                    start_altitude
+    const walkQueryStr =   `SELECT *
                             FROM walks;`
     const fetchWalksResult = await db.query(walkQueryStr)
 
