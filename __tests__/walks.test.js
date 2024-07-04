@@ -45,7 +45,7 @@ describe("POST/api/walks", () => {
                         ]
             }
 
-        const expetedResult = { walk: { id: 3,
+        const expectedResult = { walk: { id: 3,
                                         creator_id: 1,
                                         title: 'Bronte country 2',
                                         description: 'Haworth to Withins Heights with only start, middle and end locations.',
@@ -60,7 +60,7 @@ describe("POST/api/walks", () => {
       
 
         const response  = await request(app).post("/api/walks").send(requestBody).expect(201)
-        expect(response.body).toEqual(expetedResult)
+        expect(response.body).toEqual(expectedResult)
     })
 })
 
