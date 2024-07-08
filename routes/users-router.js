@@ -1,5 +1,5 @@
 const usersRouter = require('express').Router()
-const {getUser} = require('../controllers/users.controller')
+const {getUser , signIn } = require('../controllers/users.controller')
 
 usersRouter.route('/')
     .get(getUser)
