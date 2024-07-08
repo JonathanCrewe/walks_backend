@@ -30,3 +30,18 @@ describe("GET/api/user", () => {
          expect(body.user).toEqual(expectedResult)
     })
 })
+
+describe("POST/api/user/login", () => {
+    test.only("200 - responds with a 200 and returns a user object matching the criteria", async () => {
+        const requestBody = {   username: 'Jonathan',
+                                password: 'Jonathan'}
+
+        const expectedResult =  {   id: 2, 
+                                    username: 'Jonathan'
+                                    }
+
+         const {body} = await request(app).post("/api/user/login").send(requestBody).expect(200)
+        
+         expect(body.user).toEqual(expectedResult)
+    })
+})
