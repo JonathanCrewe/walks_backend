@@ -1,4 +1,4 @@
-const {createTrail, fetchWalks} = require('../models/walks.model')
+const {createTrail, fetchWalks, removeWalk} = require('../models/walks.model')
 
 async function postTrail(req, res, next) {
     try {
@@ -17,10 +17,21 @@ async function getWalks(req, res, next) {
         const walkArray = await fetchWalks(creatorId)
         res.status(200).send({walks: walkArray})
     }
-    catch {
+    catch(err) {
+        next(err)
+    }
+}
+
+async function deleteWalk(req, res, next) {
+    try {
+        const id = parseInt(req.params.id)
+        await removeWalk(id)
+        res.status(204).send()
+    }
+    catch(err) {
         next(err)
     }
 }
 
 
-module.exports = {getWalks, postTrail}
+module.exports = {getWalks, postTrail, deleteWalk}

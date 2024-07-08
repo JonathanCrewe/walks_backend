@@ -32,7 +32,7 @@ describe("GET/api/user", () => {
 })
 
 describe("POST/api/user/login", () => {
-    test.only("200 - responds with a 200 and returns a user object matching the criteria", async () => {
+    test("200 - responds with a 200 and returns a user object matching the criteria", async () => {
         const requestBody = {   username: 'Jonathan',
                                 password: 'Jonathan'}
 

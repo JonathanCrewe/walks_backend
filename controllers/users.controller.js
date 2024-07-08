@@ -20,7 +20,6 @@ const signIn = async (req, res) => {
   try {
     const { username, password } = req.body;
     const user = await fetchUserByUsername(username);
-    console.log(user)
 
     if (!user) {
       return res
@@ -32,7 +31,6 @@ const signIn = async (req, res) => {
     const isPasswordValid = password === user.password;
 
     if (!isPasswordValid) {
-        (console.log("invalid password"))
       return res
         .status(401)
         .json({ message: "Invalid credentials" });

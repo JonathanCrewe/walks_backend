@@ -117,3 +117,26 @@ describe("GET/api/walks/:creator_id", () => {
         expect(body.walks).toEqual(expectedResult)
     })
 })
+
+
+describe("DELETE/api/walk/:id", () => {
+    test("400 - responds with a Bad Request if id is not an Integer", async () => {
+        const {body}  = await request(app).delete("/api/walk/BadIDType").expect(400)
+        expect(body.msg).toBe("Bad Request")
+    })
+
+    test("404 - responds with a 404 Not Found if id is not in DB", async () => {
+        const {body}  = await request(app).delete("/api/walk/7897688").expect(404)
+        expect(body.msg).toBe("Not Found")
+    })
+
+    test("204 - responds with a 204 for valid input", async () => {
+        await request(app).delete("/api/walk/2").expect(204)
+
+        const selectWalkResult = await db.query(`SELECT 1 FROM walks WHERE id = $1;`, [2])
+        expect(selectWalkResult.rows).toEqual([])
+
+        const selectLocationsResult = await db.query(`SELECT 1 FROM walk_location_points WHERE walk_id = $1;`, [2])
+        expect(selectLocationsResult.rows).toEqual([])
+    })
+})

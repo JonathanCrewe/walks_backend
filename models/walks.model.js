@@ -80,4 +80,18 @@ async function fetchWalks(creatorId) {
 }
 
 
-module.exports = {createTrail, fetchWalks}
+async function removeWalk(id) {
+    if (!Number.isInteger(id)) {
+        return Promise.reject({ status: 400, msg: "Bad Request" })
+    }
+
+    let deleteStr = 'DELETE FROM walks WHERE id = $1;'
+    const deleteResult = await db.query(deleteStr, [id])
+
+    if (deleteResult.rowCount === 0) {
+        return Promise.reject({ status: 404, msg: "Not Found" });
+    }
+}
+
+
+module.exports = {createTrail, fetchWalks, removeWalk}
