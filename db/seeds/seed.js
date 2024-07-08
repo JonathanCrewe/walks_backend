@@ -26,7 +26,7 @@ async function seed ({userData, walkData, walkLocationsData}) {
                         start_altitude NUMERIC(6,2) NOT NULL );`)
     await db.query(`CREATE TABLE walk_location_points (
                         id SERIAL PRIMARY KEY,
-                        walk_id INT REFERENCES walks(id), 
+                        walk_id INT REFERENCES walks(id) ON DELETE CASCADE, 
                         latitude NUMERIC(10,7) NOT NULL, 
                         longitude NUMERIC(10,7) NOT NULL, 
                         altitude NUMERIC(6,2) NOT NULL, 
