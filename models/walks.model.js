@@ -1,6 +1,8 @@
 const db = require("../db/connection")
 const format = require('pg-format');
 
+
+// Create Trail. 
 async function createTrail(trailObj) {
     const returnObj = {}
 
@@ -61,7 +63,9 @@ async function createTrail(trailObj) {
     return returnObj
 }
 
-async function fetchWalks(creatorId, difficultyRequired) {
+// Fetch Walks. 
+async function fetchWalks(creatorId, difficultyRequired, minDistance, maxDistance) {
+    // Code body. 
     let walkQueryStr = `SELECT  wlk.*, 
                                 usr.username
                         FROM    walks wlk
@@ -69,11 +73,13 @@ async function fetchWalks(creatorId, difficultyRequired) {
 
     const queryParamArray = []
 
+    // Creator. 
     if (creatorId) {
         queryParamArray.push(creatorId)
         walkQueryStr += ` WHERE creator_id = $1`
     }
 
+    // Difficulty. 
     if (difficultyRequired) {
         if (queryParamArray.length) {
             walkQueryStr += ` AND`
@@ -85,14 +91,40 @@ async function fetchWalks(creatorId, difficultyRequired) {
         walkQueryStr += ` difficulty = $${queryParamArray.length}`
     }
 
+    // MinDistance
+    if (minDistance) {
+        if (queryParamArray.length) {
+            walkQueryStr += ` AND`
+        } else {
+            walkQueryStr += ` WHERE`
+        }
+
+        queryParamArray.push(minDistance)
+        walkQueryStr += ` distance_km >= $${queryParamArray.length}`
+    }
+
+    // MaxDistance
+    if (maxDistance) {
+        if (queryParamArray.length) {
+            walkQueryStr += ` AND`
+        } else {
+            walkQueryStr += ` WHERE`
+        }
+
+        queryParamArray.push(maxDistance)
+        walkQueryStr += ` distance_km <= $${queryParamArray.length}`
+    }
+
     walkQueryStr = walkQueryStr + ';'
+
+    console.log(walkQueryStr)
 
     const fetchWalksResult = await db.query(walkQueryStr, queryParamArray)
 
     return fetchWalksResult.rows
 }
 
-
+// Remove Walk. 
 async function removeWalk(id) {
     if (!Number.isInteger(id)) {
         return Promise.reject({ status: 400, msg: "Bad Request" })

@@ -121,7 +121,7 @@ describe("GET/api/walks/2", () => {
     })
 })
 
-describe("GET/api/walks?difficulty=2", () => {
+describe("GET/api/walks? - queries", () => {
     test("200 - responds with a 200 and list of walks by difficulty", async () => {
         const expectedResult = [{   id: 2,
                                     creator_id: 2, 
@@ -166,6 +166,66 @@ describe("GET/api/walks?difficulty=2", () => {
         const expectedResult = []
 
         const {body} = await request(app).get("/api/walks/1?difficulty=2").expect(200)  
+        expect(body.walks).toEqual(expectedResult)
+    })
+
+    test("200 - responds with a 200 and list of walks >= minDistance ", async () => {
+        const expectedResult = [{   id: 1,
+                                    creator_id: 1,
+                                    username: 'Anonymous',
+                                    title: 'Bronte country',
+                                    description: 'Haworth to Withins Heights and back via Bronte Waterfalls and Bronte Bridge.',
+                                    distance_km: "11.72",
+                                    ascent: "345.75",
+                                    rating: null, 
+                                    difficulty:  "5",
+                                    start_latitude: "53.8289460",
+                                    start_longitude: "-1.9569740",
+                                    start_altitude: "0.00" 
+                                }
+                                ]
+
+        const {body} = await request(app).get("/api/walks?minDistance=10").expect(200)  
+        expect(body.walks).toEqual(expectedResult)
+    })
+
+    test("200 - responds with a 200 and list of walks <= maxDistance ", async () => {
+        const expectedResult = [{   id: 2,
+                                    creator_id: 2, 
+                                    username: 'Jonathan',
+                                    title: 'Ilkley Moor',
+                                    description: 'Ilkley Moor - short and windy walk.',
+                                    distance_km: "5.55",
+                                    ascent: "219.62",
+                                    rating: null, 
+                                    difficulty:  "2",
+                                    start_latitude: "53.9166200",
+                                    start_longitude: "-1.7998800",
+                                    start_altitude: "0.00" 
+                                }
+                                ]
+
+        const {body} = await request(app).get("/api/walks?maxDistance=10").expect(200)  
+        expect(body.walks).toEqual(expectedResult)
+    })
+
+    test.only("200 - responds with a 200 and list of walks when all criteria applied", async () => {
+        const expectedResult = [{   id: 1,
+                                    creator_id: 1,
+                                    username: 'Anonymous',
+                                    title: 'Bronte country',
+                                    description: 'Haworth to Withins Heights and back via Bronte Waterfalls and Bronte Bridge.',
+                                    distance_km: "11.72",
+                                    ascent: "345.75",
+                                    rating: null, 
+                                    difficulty:  "5",
+                                    start_latitude: "53.8289460",
+                                    start_longitude: "-1.9569740",
+                                    start_altitude: "0.00" 
+                                }
+                                ]
+
+        const {body} = await request(app).get("/api/walks/1?difficulty=5&minDistance=1&maxDistance=12").expect(200)  
         expect(body.walks).toEqual(expectedResult)
     })
 })
