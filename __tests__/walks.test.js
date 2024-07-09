@@ -209,7 +209,7 @@ describe("GET/api/walks? - queries", () => {
         expect(body.walks).toEqual(expectedResult)
     })
 
-    test.only("200 - responds with a 200 and list of walks when all criteria applied", async () => {
+    test("200 - responds with a 200 and list of walks when all criteria applied", async () => {
         const expectedResult = [{   id: 1,
                                     creator_id: 1,
                                     username: 'Anonymous',
