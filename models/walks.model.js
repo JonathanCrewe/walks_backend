@@ -117,8 +117,6 @@ async function fetchWalks(creatorId, difficultyRequired, minDistance, maxDistanc
 
     walkQueryStr = walkQueryStr + ';'
 
-    console.log(walkQueryStr)
-
     const fetchWalksResult = await db.query(walkQueryStr, queryParamArray)
 
     return fetchWalksResult.rows
