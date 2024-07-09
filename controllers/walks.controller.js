@@ -14,7 +14,8 @@ async function postTrail(req, res, next) {
 async function getWalks(req, res, next) {
     try {
         const creatorId = req.params.creator_id
-        const walkArray = await fetchWalks(creatorId)
+        const {difficulty} = req.query
+        const walkArray = await fetchWalks(creatorId, difficulty)
         res.status(200).send({walks: walkArray})
     }
     catch(err) {

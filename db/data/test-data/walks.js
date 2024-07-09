@@ -5,7 +5,7 @@ module.exports = [
         distance_km: 11.72,
         ascent: 345.75,
         rating: null, 
-        difficulty:  null,
+        difficulty:  5,
         start_latitude: 53.8289460,
         start_longitude: -1.9569740,
         start_altitude: 0 
@@ -17,7 +17,7 @@ module.exports = [
         distance_km: 5.55,
         ascent: 219.62,
         rating: null, 
-        difficulty:  null,
+        difficulty:  2,
         start_latitude: 53.9166200,
         start_longitude: -1.7998800,
         start_altitude: 0 

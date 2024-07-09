@@ -61,7 +61,7 @@ async function createTrail(trailObj) {
     return returnObj
 }
 
-async function fetchWalks(creatorId) {
+async function fetchWalks(creatorId, difficultyRequired) {
     let walkQueryStr = `SELECT  wlk.*, 
                                 usr.username
                         FROM    walks wlk
@@ -71,7 +71,18 @@ async function fetchWalks(creatorId) {
 
     if (creatorId) {
         queryParamArray.push(creatorId)
-        walkQueryStr = walkQueryStr + ' WHERE creator_id = $1'
+        walkQueryStr += ` WHERE creator_id = $1`
+    }
+
+    if (difficultyRequired) {
+        if (queryParamArray.length) {
+            walkQueryStr += ` AND`
+        } else {
+            walkQueryStr += ` WHERE`
+        }
+
+        queryParamArray.push(difficultyRequired)
+        walkQueryStr += ` difficulty = $${queryParamArray.length}`
     }
 
     walkQueryStr = walkQueryStr + ';'
