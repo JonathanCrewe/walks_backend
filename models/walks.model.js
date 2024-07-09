@@ -62,8 +62,10 @@ async function createTrail(trailObj) {
 }
 
 async function fetchWalks(creatorId) {
-    let walkQueryStr = `SELECT *
-                        FROM walks`
+    let walkQueryStr = `SELECT  wlk.*, 
+                                usr.username
+                        FROM    walks wlk
+                        JOIN users usr ON usr.id = wlk.creator_id`
 
     const queryParamArray = []
 

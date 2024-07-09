@@ -68,6 +68,7 @@ describe("GET/api/walks", () => {
     test("200 - responds with a 200 and list of walks", async () => {
         const expectedResult = [{   id: 1,
                                     creator_id: 1,
+                                    username: 'Anonymous',
                                     title: 'Bronte country',
                                     description: 'Haworth to Withins Heights and back via Bronte Waterfalls and Bronte Bridge.',
                                     distance_km: "11.72",
@@ -80,6 +81,7 @@ describe("GET/api/walks", () => {
                                 },
                                 {   id: 2,
                                     creator_id: 2,
+                                    username: 'Jonathan',
                                     title: 'Ilkley Moor',
                                     description: 'Ilkley Moor - short and windy walk.',
                                     distance_km: "5.55",
@@ -100,7 +102,8 @@ describe("GET/api/walks", () => {
 describe("GET/api/walks/:creator_id", () => {
     test("200 - responds with a 200 and list of walks by creator_id", async () => {
         const expectedResult = [{   id: 2,
-                                    creator_id: 2,
+                                    creator_id: 2, 
+                                    username: 'Jonathan',
                                     title: 'Ilkley Moor',
                                     description: 'Ilkley Moor - short and windy walk.',
                                     distance_km: "5.55",
