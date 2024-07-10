@@ -19,6 +19,6 @@ afterAll( () => {
 describe("GET/api/walklocationpoints/1", () => {
     test("200 - responds with a 200 and list of walk location points for the given walk_id", async () => {
         const {body} = await request(app).get("/api/walklocationpoints/1").expect(200)
-        expect(body.locationPoints).toHaveLength(67)
+        expect(body.locationPoints).toHaveLength(100)
     })
 })

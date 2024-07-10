@@ -1,0 +1,10 @@
+ id | creator_id |             title              |                                 description                                  | distance_km | ascent | rating | difficulty | start_latitude | start_longitude | start_altitude 
+----+------------+--------------------------------+------------------------------------------------------------------------------+-------------+--------+--------+------------+----------------+-----------------+----------------
+  1 |          2 | Bronte country                 | Haworth to Withins Heights and back via Bronte Waterfalls and Bronte Bridge. |       11.72 | 345.75 |        |          5 |     53.8289460 |      -1.9569740 |           0.00
+  2 |          3 | Ilkley Moor                    | Ilkley Moor - short and windy walk.                                          |        5.55 | 219.62 |        |          2 |     53.7743100 |      -1.9006900 |           0.00
+  3 |          4 | Ogden Water                    | It is always wet in Ogden.                                                   |        6.10 | 156.26 |        |          2 |     53.9166200 |      -1.7998800 |           0.00
+  4 |          5 | Mytholmroyd to Stoodley Pike   | Most Yorkshire name ever!                                                    |       13.41 | 549.32 |        |          8 |     53.7292100 |      -1.9829300 |           0.00
+  5 |          4 | Hebden Bridge to Stoodley Pike | Another walk to Stoodley Pike                                                |       11.73 | 395.61 |        |          5 |     53.7389800 |      -2.0090700 |           0.00
+  6 |          4 | Oxenhope - Nab Hill            | A long walk for the hardcore hiker.                                          |       15.68 | 478.46 |        |          8 |     53.8145000 |      -1.9512000 |           0.00
+(6 rows)
+

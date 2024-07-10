@@ -41,7 +41,6 @@ async function seed ({userData, walkData, walkLocationsData}) {
     )
 
     const insertUserResult = await db.query(insertUserStr)
-   // const userId = insertUserResult.rows[0].id
 
     // Walks. 
     const insertWalkStr = format(`INSERT INTO walks (
