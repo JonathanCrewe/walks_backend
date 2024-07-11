@@ -12,8 +12,8 @@ module.exports = [
     },
     {
         creator_id: 3,
-        title: 'Ilkley Moor',
-        description: 'Ilkley Moor - short and windy walk.',
+        title: 'Ogden Water',
+        description: 'It is always wet in Ogden.',
         distance_km: 5.55,
         ascent: 219.62,
         rating: null, 
@@ -24,8 +24,8 @@ module.exports = [
     },
     {
         creator_id: 4,
-        title: 'Ogden Water',
-        description: 'It is always wet in Ogden.',
+        title: 'Ilkley Moor',
+        description: 'Ilkley Moor - short and windy walk.',
         distance_km: 6.10,
         ascent: 156.26,
         rating: null, 
